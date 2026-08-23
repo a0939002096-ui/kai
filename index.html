@@ -225,6 +225,17 @@
       box-shadow: 0 4px 12px var(--primary-glow);
     }
 
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: none;
+    }
+
     .form-group {
       margin-bottom: 1rem;
       width: 100%;
@@ -297,7 +308,7 @@
     }
 
     .checklist-group {
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
     .checklist-title {
@@ -310,16 +321,59 @@
     .checklist-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.4rem;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
       font-size: 0.88rem;
       color: var(--sub-text);
+      cursor: pointer;
+      user-select: none;
     }
 
     .checklist-item input[type="checkbox"] {
       accent-color: var(--primary);
-      width: 16px;
-      height: 16px;
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+    }
+
+    /* 進度條樣式 */
+    .progress-container {
+      margin-bottom: 1.2rem;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 20px;
+      transition: width 0.3s ease;
+    }
+
+    .checklist-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
     }
 
     footer {
@@ -513,42 +567,58 @@
       </div>
     </div>
 
-    <!-- 3. 新生開宿必備清單 -->
+    <!-- 3. 新生開宿必備清單 (具備進度條與清除功能) -->
     <div id="tab-packing" class="tab-content">
       <div class="info-card">
         <div class="info-detail" style="width: 100%;">
           <h3>📋 大一新生入住攜帶物品清單 Check List</h3>
           <p style="margin-bottom:1rem;">入住前請確認以下物品是否已準備妥當：</p>
 
+          <!-- 進度條區塊 -->
+          <div class="progress-container">
+            <div class="progress-header">
+              <span>準備進度</span>
+              <span id="progress-text">0 / 0 (0%)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+          </div>
+
+          <!-- 清除按鈕區塊 -->
+          <div class="checklist-actions">
+            <button class="action-btn btn-secondary" onclick="clearChecklist()">🧹 清除所有勾選</button>
+          </div>
+
           <div class="checklist-group">
             <div class="checklist-title">📄 重要證件與文件</div>
-            <label class="checklist-item"><input type="checkbox"> 身分證、健保卡、印章與個人大頭照</label>
-            <label class="checklist-item"><input type="checkbox"> 錄取通知單 / 報到相關文件</label>
-            <label class="checklist-item"><input type="checkbox"> 男宿臨時門禁卡押金（現金 NT$ 100）</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 身分證、健保卡、印章與個人大頭照</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 錄取通知單 / 報到相關文件</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 男宿臨時門禁卡押金（現金 NT$ 100）</label>
           </div>
 
           <div class="checklist-group">
             <div class="checklist-title">🛏️ 寢具用品（尺寸請參考「宿舍簡介」）</div>
-            <label class="checklist-item"><input type="checkbox"> 單人床墊（切勿超越床板尺寸）</label>
-            <label class="checklist-item"><input type="checkbox"> 枕頭、被子、床單與枕頭套</label>
-            <label class="checklist-item"><input type="checkbox"> 涼席 / 涼被（夏季入住通風必備）</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 單人床墊（切勿超越床板尺寸）</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 枕頭、被子、床單與枕頭套</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 涼席 / 涼被（夏季入住通風必備）</label>
           </div>
 
           <div class="checklist-group">
             <div class="checklist-title">🚿 個人盥洗與生活用品</div>
-            <label class="checklist-item"><input type="checkbox"> 洗髮精、沐浴乳、牙刷、牙膏、洗面乳</label>
-            <label class="checklist-item"><input type="checkbox"> 盥洗籃 / 籃子（方便攜帶至公共浴室）</label>
-            <label class="checklist-item"><input type="checkbox"> 毛巾、浴巾、抹布（開宿清掃個人床位）</label>
-            <label class="checklist-item"><input type="checkbox"> 衣架、晒衣夾、衣櫃門鎖、洗衣精/洗衣膠囊</label>
-            <label class="checklist-item"><input type="checkbox"> 個人常備藥品、體溫計、衛生紙</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 洗髮精、沐浴乳、牙刷、牙膏、洗面乳</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 盥洗籃 / 籃子（方便攜帶至公共浴室）</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 毛巾、浴巾、抹布（開宿清掃個人床位）</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 衣架、晒衣夾、衣櫃門鎖、洗衣精/洗衣膠囊</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 個人常備藥品、體溫計、衛生紙</label>
           </div>
 
           <div class="checklist-group">
             <div class="checklist-title">🔌 個人電器與學習工具</div>
-            <label class="checklist-item"><input type="checkbox"> 檯燈（房內無附檯燈，請務必自備）</label>
-            <label class="checklist-item"><input type="checkbox"> 延長線（建議選用有過載保護器與合格檢驗者）</label>
-            <label class="checklist-item"><input type="checkbox"> 手機/電腦充電器、網路線（若欲連接有線網路）</label>
-            <label class="checklist-item"><input type="checkbox"> 吹風機、小風扇</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 檯燈（房內無附檯燈，請務必自備）</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 延長線（建議選用有過載保護器與合格檢驗者）</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 手機/電腦充電器、網路線（若欲連接有線網路）</label>
+            <label class="checklist-item"><input type="checkbox" onchange="updateProgress()"> 吹風機、小風扇</label>
           </div>
 
           <div class="checklist-group" style="margin-bottom:0;">
@@ -589,7 +659,7 @@
       </div>
     </div>
 
-    <!-- 5. 宿舍生活規範與門禁 (合併: 門禁 + 冰箱 + 鑰匙 + 違規) -->
+    <!-- 5. 宿舍生活規範與門禁 -->
     <div id="tab-rules" class="tab-content">
       <!-- 5-1. 夜間門禁與出入口 -->
       <div class="info-card">
@@ -725,6 +795,34 @@
 
       document.getElementById('mobile-nav').value = tabId;
     }
+
+    // 更新備辦清單進度條
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('#tab-packing input[type="checkbox"]');
+      const total = checkboxes.length;
+      let checkedCount = 0;
+
+      checkboxes.forEach(cb => {
+        if (cb.checked) checkedCount++;
+      });
+
+      const percentage = total === 0 ? 0 : Math.round((checkedCount / total) * 100);
+      
+      document.getElementById('progress-text').innerText = `${checkedCount} / ${total} (${percentage}%)`;
+      document.getElementById('progress-bar-fill').style.width = `${percentage}%`;
+    }
+
+    // 清除所有勾選
+    function clearChecklist() {
+      const checkboxes = document.querySelectorAll('#tab-packing input[type="checkbox"]');
+      checkboxes.forEach(cb => cb.checked = false);
+      updateProgress();
+    }
+
+    // 初始化頁面時計算一次進度
+    window.addEventListener('DOMContentLoaded', () => {
+      updateProgress();
+    });
 
     function queryEntrance() {
       const b = document.getElementById('building-select').value;
