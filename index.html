@@ -53,6 +53,7 @@
       border-radius: 14px;
       border: 1px solid var(--card-border);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      overflow-x: auto;
     }
 
     .nav-btn {
@@ -62,7 +63,7 @@
       color: var(--sub-text);
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       border-radius: 10px;
       transition: all 0.25s ease;
       white-space: nowrap;
@@ -277,6 +278,25 @@
       display: block;
     }
 
+    /* 新生分流表格樣式 */
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .schedule-table th, .schedule-table td {
+      border: 1px solid var(--card-border);
+      padding: 0.6rem;
+      text-align: left;
+    }
+
+    .schedule-table th {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+    }
+
     footer {
       text-align: center;
       margin-top: 2.5rem;
@@ -292,21 +312,25 @@
   <div class="container">
     <!-- Desktop 頁籤選單 -->
     <nav class="nav-tabs">
-      <button class="nav-btn active" onclick="switchTab('curfew')">🌙 門禁出入</button>
+      <button class="nav-btn active" onclick="switchTab('freshman')">🎓 新生開宿指南</button>
+      <button class="nav-btn" onclick="switchTab('curfew')">🌙 門禁出入</button>
       <button class="nav-btn" onclick="switchTab('fee')">💰 住宿費用</button>
       <button class="nav-btn" onclick="switchTab('fridge')">🧊 冰箱規定</button>
-      <button class="nav-btn" onclick="switchTab('rule')">⚠️ 違規處理</button>
+      <button class="nav-btn" onclick="switchTab('rule')">⚠️ 違規處分</button>
       <button class="nav-btn" onclick="switchTab('key')">🔑 鑰匙借用</button>
+      <button class="nav-btn" onclick="switchTab('tutorship')">📌 生輔組須知</button>
     </nav>
 
     <!-- Mobile 下拉選單 -->
     <div class="nav-select-wrapper">
       <select class="nav-select" id="mobile-nav" onchange="switchTab(this.value)">
+        <option value="freshman">🎓 新生開宿指南 (115學年)</option>
         <option value="curfew">🌙 門禁出入</option>
         <option value="fee">💰 住宿費用</option>
         <option value="fridge">🧊 冰箱規定</option>
-        <option value="rule">⚠️ 違規處理</option>
+        <option value="rule">⚠️ 違規處分</option>
         <option value="key">🔑 鑰匙借用</option>
+        <option value="tutorship">📌 生輔組須知</option>
       </select>
     </div>
 
@@ -315,8 +339,81 @@
       <p class="subtitle">學生宿舍自治規章、費用與智慧服務查詢系統</p>
     </header>
 
+    <!-- 0. 新生開宿指南 (新增) -->
+    <div id="tab-freshman" class="tab-content active">
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>📅 115 學年度大學部新生開宿時間</h3>
+          <p>• <strong>開宿日期：</strong>115 年 8 月 29 日（六）及 8 月 30 日（日）</p>
+          <p>• <strong>辦理時間：</strong>每日 08:00 - 18:00</p>
+          <p>• <strong>家長協助：</strong>僅開放上述開宿兩天之 08:00 - 18:00 家長可進入宿舍區協助搬運行李。</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🚗 搬宿車輛停放動線</h3>
+          <p>• <strong>男新生家長：</strong>請於宿舍黃色範圍卸載行李後，依指示開往民生校區停放於校內停車場，再步行經天橋回宿舍區。</p>
+          <p>• <strong>女新生家長：</strong>可直接停放於民生校區校內停車場，再步行至莊敬苑協助。</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🔀 8/29 - 8/30 新生報到分流表</h3>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>日期</th>
+                <th>時段</th>
+                <th>學系分流</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="2"><strong>8/29 (六)</strong></td>
+                <td>08:00-13:00</td>
+                <td>教育學系</td>
+              </tr>
+              <tr>
+                <td>13:00-18:00</td>
+                <td>文創系、幼教系、語教系、特教系、區域社會系、體育系、台語系、國企系</td>
+              </tr>
+              <tr>
+                <td rowspan="2"><strong>8/30 (日)</strong></td>
+                <td>08:00-13:00</td>
+                <td>美術學系</td>
+              </tr>
+              <tr>
+                <td>13:00-18:00</td>
+                <td>科培系、音樂系、數位系、諮心系、英語系、數教系、不分系、資工系</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>📝 男女宿報到流程說明</h3>
+          <p>• <strong>男宿 (迎曦樓)：</strong>至 1 樓學生餐廳（五權路49號）尋找房號床號 ➔ 告知櫃檯 ➔ 繳交<strong>押金 NT$ 100</strong> 領取門禁臨時卡。（領到學生證後持卡至宿舍辦公室辦理退卡退押金）</p>
+          <p>• <strong>女宿 (莊敬苑)：</strong>至大廳（民生路140號）尋找房號床號 ➔ 告知櫃檯並領取鑰匙 ➔ 開學前 3 週使用大廳張貼之通行密碼出入。</p>
+          <p style="margin-top:0.4rem;"><small style="color:var(--sub-text);">※ 床位計算說明：進入房間面對窗戶，由右側靠房門為第 1 床，依逆時針順序計算。</small></p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>⏰ 8/31 - 9/4 延後入住注意事項</h3>
+          <p>• 男宿暫停卸貨車輛至多 30 分鐘（18:00 後禁止車輛進入），須先至宿舍服務中心登記。</p>
+          <p>• <strong>8/31 之後家長一律禁止進入宿舍區協助。</strong></p>
+          <p>• 聯絡電話：床位承辦劉小姐 04-22183161 / 宿舍服務中心 04-22188207 / 緊急專線 04-22188205</p>
+        </div>
+      </div>
+    </div>
+
     <!-- 1. 門禁出入 -->
-    <div id="tab-curfew" class="tab-content active">
+    <div id="tab-curfew" class="tab-content">
       <div class="info-card">
         <div class="info-detail">
           <h3>🌙 全校宿舍夜間門禁</h3>
@@ -404,7 +501,7 @@
       </div>
     </div>
 
-    <!-- 4. 違規處理 -->
+    <!-- 4. 違規處分 -->
     <div id="tab-rule" class="tab-content">
       <div class="info-card">
         <div class="info-detail" style="width: 100%;">
@@ -440,6 +537,38 @@
       </div>
     </div>
 
+    <!-- 6. 生輔組注意事項 -->
+    <div id="tab-tutorship" class="tab-content">
+      <div class="info-card">
+        <div class="info-detail">
+          <h3>📋 退宿退費與床位重要規定</h3>
+          <p>• <strong>退宿候補機制：</strong>分配床位後中途退宿者（自願放棄、休學、轉學等）或退宿檢查未通過者，後續僅能以候補方式申請。</p>
+          <p>• <strong>退費辦理：</strong>一學期於期初與期末統一批次辦理兩次。</p>
+          <p>• <strong>申請表單：</strong>須使用最新公告表格並完成簽章後親自交至宿舍辦公室。</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail">
+          <h3>🎓 教育部校內住宿補貼方案</h3>
+          <p>• <strong>一般生：</strong>最高補貼 NT$ 5,000 / 學期。</p>
+          <p>• <strong>弱勢生/軍人子女：</strong>最高補貼 NT$ 7,000 / 學期。</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>📞 生輔組宿舍承辦窗口</h3>
+          <p>• <strong>宿舍床位業務：</strong>賴老師 (04-22183110)</p>
+          <p>• <strong>宿舍床位承辦劉小姐：</strong>04-22183161</p>
+          <p>• <strong>宿舍緊急聯絡專線：</strong>04-22188205</p>
+          <a href="https://tutorship.ntcu.edu.tw/data/3/51" target="_blank" rel="noopener noreferrer" class="action-btn" style="display: block; text-align: center; margin-top: 0.8rem;">
+            🔗 開啟生活輔導組官方公告網頁
+          </a>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <p>Made with ❤️ by <strong>愷</strong></p>
     </footer>
@@ -453,7 +582,10 @@
       const targetContent = document.getElementById(`tab-${tabId}`);
       if (targetContent) targetContent.classList.add('active');
 
-      const targetBtn = Array.from(document.querySelectorAll('.nav-btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
+      const targetBtn = Array.from(document.querySelectorAll('.nav-btn')).find(btn => {
+        const attr = btn.getAttribute('onclick');
+        return attr && attr.includes(`'${tabId}'`);
+      });
       if (targetBtn) targetBtn.classList.add('active');
 
       document.getElementById('mobile-nav').value = tabId;
