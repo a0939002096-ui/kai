@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏢 臺中教大宿舍規章與服務地圖</title>
+  <style>
+    :root {
+      --bg: #0b1329;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --sub-text: #94a3b8;
+      --primary: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.25);
+      --accent: #818cf8;
+      --danger: #f43f5e;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 20% 20%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(129, 140, 248, 0.1) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text);
+      padding: 1.5rem 1rem;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 680px;
+      width: 100%;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.3rem;
+      margin-bottom: 2rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      padding: 0.4rem;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-btn {
+      flex: 1;
+      padding: 0.65rem 0.2rem;
+      text-align: center;
+      color: var(--sub-text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.82rem;
+      border-radius: 10px;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #0f172a;
+      font-weight: 700;
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .nav-select-wrapper {
+      display: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--primary);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 700;
+      outline: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%38bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1.2rem;
+    }
+
+    .nav-select option {
+      background: #0f172a;
+      color: var(--text);
+      padding: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .nav-tabs {
+        display: none;
+      }
+      .nav-select-wrapper {
+        display: block;
+      }
+      .info-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .action-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    p.subtitle {
+      color: var(--sub-text);
+      font-size: 0.9rem;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .info-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .info-detail h3 {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+    }
+
+    .info-detail p {
+      font-size: 0.88rem;
+      color: var(--sub-text);
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: var(--primary);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 8px;
+      font-weight: 600;
+      margin-right: 0.3rem;
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #0f172a;
+      text-decoration: none;
+      padding: 0.6rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: opacity 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .action-btn:hover {
+      opacity: 0.9;
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--sub-text);
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+    }
+
+    .row {
+      display: flex;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    .row .form-group {
+      flex: 1;
+    }
+
+    .result-box {
+      margin-top: 0.8rem;
+      padding: 0.8rem;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--card-border);
+      display: none;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .result-box.show {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--card-border);
+      color: var(--sub-text);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Desktop 頁籤選單 -->
+    <nav class="nav-tabs">
+      <button class="nav-btn active" onclick="switchTab('curfew')">🌙 門禁出入</button>
+      <button class="nav-btn" onclick="switchTab('fee')">💰 住宿費用</button>
+      <button class="nav-btn" onclick="switchTab('fridge')">🧊 冰箱規定</button>
+      <button class="nav-btn" onclick="switchTab('rule')">⚠️ 違規處理</button>
+      <button class="nav-btn" onclick="switchTab('key')">🔑 鑰匙借用</button>
+    </nav>
+
+    <!-- Mobile 下拉選單 -->
+    <div class="nav-select-wrapper">
+      <select class="nav-select" id="mobile-nav" onchange="switchTab(this.value)">
+        <option value="curfew">🌙 門禁出入</option>
+        <option value="fee">💰 住宿費用</option>
+        <option value="fridge">🧊 冰箱規定</option>
+        <option value="rule">⚠️ 違規處理</option>
+        <option value="key">🔑 鑰匙借用</option>
+      </select>
+    </div>
+
+    <header>
+      <h1>🏢 國立臺中教育大學 宿舍服務</h1>
+      <p class="subtitle">學生宿舍自治規章、費用與智慧服務查詢系統</p>
+    </header>
+
+    <!-- 1. 門禁出入 -->
+    <div id="tab-curfew" class="tab-content active">
+      <div class="info-card">
+        <div class="info-detail">
+          <h3>🌙 全校宿舍夜間門禁</h3>
+          <p>每日管制時間為 00:00 - 06:00。宿舍區汽機車進入請減速行駛。</p>
+          <span class="tag">門禁管制: 00:00-06:00</span>
+          <span class="tag">限速: 20 km/h</span>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🚪 各樓夜間指定出入口查詢</h3>
+          <div class="form-group" style="margin-top: 0.6rem;">
+            <select id="building-select" class="form-control">
+              <option value="迎曦樓">迎曦樓</option>
+              <option value="大詠絮樓">大詠絮樓</option>
+              <option value="小詠絮樓">小詠絮樓</option>
+              <option value="莊敬苑">莊敬苑</option>
+            </select>
+          </div>
+          <button class="action-btn" style="width: 100%;" onclick="queryEntrance()">查詢出入口</button>
+          <div id="entrance-result" class="result-box"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 住宿費用 -->
+    <div id="tab-fee" class="tab-content">
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>💰 住宿費用智慧試算 (113學年度起)</h3>
+          <p style="margin-bottom: 0.8rem;">費用內含基本住宿費與計網中心網路費。</p>
+          <div class="row">
+            <div class="form-group">
+              <label>選擇樓別</label>
+              <select id="fee-building" class="form-control">
+                <option value="迎曦樓">迎曦樓</option>
+                <option value="大詠絮樓">大詠絮樓</option>
+                <option value="小詠絮樓">小詠絮樓</option>
+                <option value="莊敬苑">莊敬苑</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>選擇學期</label>
+              <select id="fee-semester" class="form-control">
+                <option value="上學期">第一學期</option>
+                <option value="下學期">第二學期</option>
+              </select>
+            </div>
+          </div>
+          <button class="action-btn" style="width: 100%;" onclick="calcFee()">開始試算</button>
+          <div id="fee-result" class="result-box"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 冰箱規定 -->
+    <div id="tab-fridge" class="tab-content">
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🧊 公共冰箱存放規定合規檢查</h3>
+          <div class="form-group" style="margin-top: 0.6rem;">
+            <label>物品種類/名稱</label>
+            <input type="text" id="fridge-item" class="form-control" placeholder="例如：鮮奶、便當、臭豆腐">
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label>冰存天數</label>
+              <input type="number" id="fridge-days" class="form-control" value="1" min="1">
+            </div>
+            <div class="form-group">
+              <label>最長邊長 (cm)</label>
+              <input type="number" id="fridge-size" class="form-control" value="15" min="1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><input type="checkbox" id="fridge-label" checked> 已貼上「存放單」標籤</label>
+          </div>
+          <div class="form-group">
+            <label><input type="checkbox" id="fridge-seal" checked> 食品已完全密封</label>
+          </div>
+          <button class="action-btn" style="width: 100%;" onclick="checkFridge()">進行檢查</button>
+          <div id="fridge-result" class="result-box"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 違規處理 -->
+    <div id="tab-rule" class="tab-content">
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>⚠️ 違規扣分與退宿試算</h3>
+          <div class="row" style="margin-top: 0.6rem;">
+            <div class="form-group">
+              <label>一般違規次數</label>
+              <input type="number" id="rule-general" class="form-control" value="0" min="0">
+            </div>
+            <div class="form-group">
+              <label>重大違規次數</label>
+              <input type="number" id="rule-major" class="form-control" value="0" min="0">
+            </div>
+          </div>
+          <button class="action-btn" style="width: 100%;" onclick="checkRule()">試算處分</button>
+          <div id="rule-result" class="result-box"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 鑰匙借用 -->
+    <div id="tab-key" class="tab-content">
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🔑 房門鑰匙借用規則</h3>
+          <div class="form-group" style="margin-top: 0.6rem;">
+            <label>當學期累積借用次數</label>
+            <input type="number" id="key-count" class="form-control" value="1" min="1">
+          </div>
+          <button class="action-btn" style="width: 100%;" onclick="checkKey()">查詢借用規則</button>
+          <div id="key-result" class="result-box"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Made with ❤️ by <strong>愷</strong></p>
+    </footer>
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      
+      const targetContent = document.getElementById(`tab-${tabId}`);
+      if (targetContent) targetContent.classList.add('active');
+
+      const targetBtn = Array.from(document.querySelectorAll('.nav-btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
+      if (targetBtn) targetBtn.classList.add('active');
+
+      document.getElementById('mobile-nav').value = tabId;
+    }
+
+    function queryEntrance() {
+      const b = document.getElementById('building-select').value;
+      const entrances = {
+        '迎曦樓': '電梯後安全梯',
+        '大詠絮樓': '一樓電梯前大門',
+        '小詠絮樓': '大廳正門',
+        '莊敬苑': '大廳正門'
+      };
+
+      const res = document.getElementById('entrance-result');
+      res.innerHTML = `📍 <strong>${b}</strong> 夜間指定出入口為：<span style="color:var(--primary);">${entrances[b]}</span><br>⏰ 管制時間：00:00 - 06:00`;
+      res.classList.add('show');
+    }
+
+    function calcFee() {
+      const b = document.getElementById('fee-building').value;
+      const s = document.getElementById('fee-semester').value;
+
+      const rates = {
+        '迎曦樓': {'上學期': 10000, '下學期': 8900},
+        '大詠絮樓': {'上學期': 10000, '下學期': 8900},
+        '小詠絮樓': {'上學期': 10000, '下學期': 8900},
+        '莊敬苑': {'上學期': 8700, '下學期': 7600}
+      };
+
+      const total = rates[b][s];
+      const net = s === '上學期' ? 500 : 400;
+
+      const res = document.getElementById('fee-result');
+      res.innerHTML = `
+        💵 <strong>${b} (${s}) 總費用：NT$ ${total}</strong><br>
+        • 宿舍費：NT$ ${total - net}<br>
+        • 網路費：NT$ ${net} (代收)<br>
+        <small style="color:var(--sub-text);">※ 第一學期費用包含寒假住宿不實施清宿</small>
+      `;
+      res.classList.add('show');
+    }
+
+    function checkFridge() {
+      const item = document.getElementById('fridge-item').value.trim();
+      const days = parseInt(document.getElementById('fridge-days').value) || 0;
+      const size = parseInt(document.getElementById('fridge-size').value) || 0;
+      const hasLabel = document.getElementById('fridge-label').checked;
+      const isSealed = document.getElementById('fridge-seal').checked;
+
+      const banned = ['臭豆腐', '泡菜', '生肉', '生雞蛋', '生海鮮', '含酒精成分', '管制藥品', '廚餘'];
+      const reasons = [];
+
+      if (!hasLabel) reasons.push('未貼示「存放單」標籤');
+      if (!isSealed) reasons.push('未完全密封');
+      if (days > 7) reasons.push('擺放超過 7 天');
+      if (size > 30) reasons.push('單邊超過 30cm');
+      if (banned.some(b => item.includes(b))) reasons.push(`包含違規禁放項目：${item}`);
+
+      const res = document.getElementById('fridge-result');
+      if (reasons.length === 0) {
+        res.innerHTML = `✅ <strong style="color:var(--success);">符合規定</strong>，可放置於公共冰箱。`;
+      } else {
+        res.innerHTML = `❌ <strong style="color:var(--danger);">違規（將予以清理移出）</strong>：<br>` + reasons.map(r => `• ${r}`).join('<br>');
+      }
+      res.classList.add('show');
+    }
+
+    function checkRule() {
+      const g = parseInt(document.getElementById('rule-general').value) || 0;
+      const m = parseInt(document.getElementById('rule-major').value) || 0;
+
+      let msg = "目前無強制退宿風險。";
+      let isDanger = false;
+
+      if (g >= 3 || m >= 2 || (g + m >= 3)) {
+        isDanger = true;
+        msg = "⚠️ 已達強制退宿標準（一般累計≥3次、重大累計≥2次，或兩者合計≥3次）";
+      } else if (m === 1) {
+        msg = "⚡ 寄送退宿預警家長通知書";
+      }
+
+      const res = document.getElementById('rule-result');
+      res.innerHTML = `
+        <strong style="color: ${isDanger ? 'var(--danger)' : 'var(--text)'}">${msg}</strong><br>
+        <small style="color:var(--sub-text);">備註：一般違規每學期得參與 2 小時勞作服務申辦銷規 1 次。</small>
+      `;
+      res.classList.add('show');
+    }
+
+    function checkKey() {
+      const count = parseInt(document.getElementById('key-count').value) || 1;
+      const res = document.getElementById('key-result');
+
+      if (count === 1) {
+        res.innerHTML = `⏱️ 借用限時 <strong>5 分鐘</strong>，本次免開立違規單。`;
+      } else {
+        res.innerHTML = `⚠️ 借用限時 <strong>5 分鐘</strong>。同一學期第二次（含）以上借用，開立違規單乙次。`;
+      }
+      res.classList.add('show');
+    }
+  </script>
+</body>
+</html>
