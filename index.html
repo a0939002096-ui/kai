@@ -338,10 +338,10 @@
     <!-- Desktop 頁籤選單 -->
     <nav class="nav-tabs">
       <button class="nav-btn active" onclick="switchTab('freshman')">🎓 新生開宿指南</button>
+      <button class="nav-btn" onclick="switchTab('intro')">🏠 宿舍簡介與設備</button>
       <button class="nav-btn" onclick="switchTab('packing')">🎒 開宿必備清單</button>
-      <button class="nav-btn" onclick="switchTab('curfew')">🌙 門禁出入</button>
       <button class="nav-btn" onclick="switchTab('fee')">💰 住宿費用</button>
-      <button class="nav-btn" onclick="switchTab('rules')">📜 宿舍生活規範</button>
+      <button class="nav-btn" onclick="switchTab('rules')">📜 宿舍生活規範與門禁</button>
       <button class="nav-btn" onclick="switchTab('tutorship')">📌 生輔組須知</button>
     </nav>
 
@@ -349,10 +349,10 @@
     <div class="nav-select-wrapper">
       <select class="nav-select" id="mobile-nav" onchange="switchTab(this.value)">
         <option value="freshman">🎓 新生開宿指南 (115學年)</option>
+        <option value="intro">🏠 宿舍簡介與床位尺寸</option>
         <option value="packing">🎒 開宿必備清單</option>
-        <option value="curfew">🌙 門禁出入</option>
         <option value="fee">💰 住宿費用</option>
-        <option value="rules">📜 宿舍生活規範 (冰箱/違規/鑰匙)</option>
+        <option value="rules">📜 宿舍生活規範與門禁 (門禁/冰箱/鑰匙/違規)</option>
         <option value="tutorship">📌 生輔組須知</option>
       </select>
     </div>
@@ -435,7 +435,85 @@
       </div>
     </div>
 
-    <!-- 2. 新生開宿必備清單 (新增) -->
+    <!-- 2. 宿舍簡介與設備 -->
+    <div id="tab-intro" class="tab-content">
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🏢 各宿舍房型配置</h3>
+          <p>• <strong>男生宿舍：</strong>迎曦樓（4 人房或 6 人房）</p>
+          <p>• <strong>女生宿舍：</strong>大詠絮樓（4 人房）、小詠絮樓（4 人房）、莊敬苑（6 人房）</p>
+          <p>• <strong>住宿期限：</strong>以一學學年為原則，收費則分學期繳費（暑假住宿每年 4 月中另行公告申請）。</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🛏️ 各樓床位最大尺寸對照表</h3>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>樓別</th>
+                <th>房型</th>
+                <th>床板最大尺寸 (長 x 寬)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="2"><strong>迎曦樓 (男)</strong></td>
+                <td>6 人房</td>
+                <td>191 cm × 86 cm</td>
+              </tr>
+              <tr>
+                <td>4 人房</td>
+                <td>207 cm × 86 cm</td>
+              </tr>
+              <tr>
+                <td><strong>大詠絮樓 (女)</strong></td>
+                <td>4 人房</td>
+                <td>220 cm × 100 cm</td>
+              </tr>
+              <tr>
+                <td><strong>小詠絮樓 (女)</strong></td>
+                <td>4 人房</td>
+                <td>200 cm × 100 cm</td>
+              </tr>
+              <tr>
+                <td><strong>莊敬苑 (女)</strong></td>
+                <td>6 人房</td>
+                <td>185 cm × 90 cm</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top: 0.6rem; color: var(--danger); font-size: 0.83rem;">
+            ⚠️ <strong>小提醒：</strong>以上尺寸為床板最大範圍，購買之床墊<strong>不可超過此尺寸</strong>，否則無法放入床框！
+          </p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🛋️ 宿舍房間與生活設施</h3>
+          <p>• <strong>寢室基本設備：</strong>書桌椅、書櫃、衣櫃、床舖、共用電扇、大燈及網路孔。</p>
+          <p>• <strong>自備物品：</strong>書桌檯燈、個人盥洗用具、衣架、衣櫃門鎖等。</p>
+          <p>• <strong>冷氣使用：</strong>使用者付費，請至指定地點購買冷氣專用卡（計費基準為 4.5 元 / 度）。</p>
+          <p>• <strong>公共衛浴：</strong>每層樓採集中式公共衛浴，內部通風採光良好。</p>
+          <p>• <strong>洗衣設備：</strong>設有投幣式洗衣機、脫水機與烘衣機。</p>
+          <p>• <strong>休閒自習空間：</strong>設有圖書閱覽室、自修室、交誼廳或健身中心。</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🛡️ 安全防護與環境規範</h3>
+          <p>• <strong>門禁管理：</strong>全區出入實施門禁系統刷學生證出入，主要出入口設有 24 小時監視系統。</p>
+          <p>• <strong>消防安全：</strong>各樓轉角皆備有乾粉滅火器、緊急照明燈及緩降逃生設備，每學期定時辦理防災演練。</p>
+          <p>• <strong>🚭 全面禁菸：</strong>宿舍內全區嚴禁吸菸，以確保居住安全與生活品質。</p>
+          <p>• <strong>♻️ 資源回收：</strong>實施垃圾強制分類，住宿生須配合環保政策進行分類丟棄。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 新生開宿必備清單 -->
     <div id="tab-packing" class="tab-content">
       <div class="info-card">
         <div class="info-detail" style="width: 100%;">
@@ -450,8 +528,8 @@
           </div>
 
           <div class="checklist-group">
-            <div class="checklist-title">🛏️ 寢具用品 (單人床規格)</div>
-            <label class="checklist-item"><input type="checkbox"> 床墊（建議單人 3x6 尺，厚度不宜過厚）</label>
+            <div class="checklist-title">🛏️ 寢具用品（尺寸請參考「宿舍簡介」）</div>
+            <label class="checklist-item"><input type="checkbox"> 單人床墊（切勿超越床板尺寸）</label>
             <label class="checklist-item"><input type="checkbox"> 枕頭、被子、床單與枕頭套</label>
             <label class="checklist-item"><input type="checkbox"> 涼席 / 涼被（夏季入住通風必備）</label>
           </div>
@@ -461,49 +539,22 @@
             <label class="checklist-item"><input type="checkbox"> 洗髮精、沐浴乳、牙刷、牙膏、洗面乳</label>
             <label class="checklist-item"><input type="checkbox"> 盥洗籃 / 籃子（方便攜帶至公共浴室）</label>
             <label class="checklist-item"><input type="checkbox"> 毛巾、浴巾、抹布（開宿清掃個人床位）</label>
-            <label class="checklist-item"><input type="checkbox"> 衣架、晒衣夾、洗衣精/洗衣膠囊</label>
+            <label class="checklist-item"><input type="checkbox"> 衣架、晒衣夾、衣櫃門鎖、洗衣精/洗衣膠囊</label>
             <label class="checklist-item"><input type="checkbox"> 個人常備藥品、體溫計、衛生紙</label>
           </div>
 
           <div class="checklist-group">
             <div class="checklist-title">🔌 個人電器與學習工具</div>
+            <label class="checklist-item"><input type="checkbox"> 檯燈（房內無附檯燈，請務必自備）</label>
             <label class="checklist-item"><input type="checkbox"> 延長線（建議選用有過載保護器與合格檢驗者）</label>
             <label class="checklist-item"><input type="checkbox"> 手機/電腦充電器、網路線（若欲連接有線網路）</label>
-            <label class="checklist-item"><input type="checkbox"> 吹風機、檯燈、小風扇</label>
+            <label class="checklist-item"><input type="checkbox"> 吹風機、小風扇</label>
           </div>
 
           <div class="checklist-group" style="margin-bottom:0;">
             <div class="checklist-title" style="color:var(--danger);">🚫 嚴禁攜帶物品（違者依規處分）</div>
             <p style="font-size:0.83rem; color:var(--sub-text);">高功率發熱電器（如：電鍋、電磁爐、電熱水瓶、微波爐、電暖器）、瓦斯爐、寵物、麻將/棋牌博弈工具。</p>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. 門禁出入 -->
-    <div id="tab-curfew" class="tab-content">
-      <div class="info-card">
-        <div class="info-detail">
-          <h3>🌙 全校宿舍夜間門禁</h3>
-          <p>每日管制時間為 00:00 - 06:00。宿舍區汽機車進入請減速行駛。</p>
-          <span class="tag">門禁管制: 00:00-06:00</span>
-          <span class="tag">限速: 20 km/h</span>
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-detail" style="width: 100%;">
-          <h3>🚪 各樓夜間指定出入口查詢</h3>
-          <div class="form-group" style="margin-top: 0.6rem;">
-            <select id="building-select" class="form-control">
-              <option value="迎曦樓">迎曦樓</option>
-              <option value="大詠絮樓">大詠絮樓</option>
-              <option value="小詠絮樓">小詠絮樓</option>
-              <option value="莊敬苑">莊敬苑</option>
-            </select>
-          </div>
-          <button class="action-btn" style="width: 100%;" onclick="queryEntrance()">查詢出入口</button>
-          <div id="entrance-result" class="result-box"></div>
         </div>
       </div>
     </div>
@@ -538,12 +589,31 @@
       </div>
     </div>
 
-    <!-- 5. 宿舍生活規範 (合併: 冰箱 + 違規 + 鑰匙) -->
+    <!-- 5. 宿舍生活規範與門禁 (合併: 門禁 + 冰箱 + 鑰匙 + 違規) -->
     <div id="tab-rules" class="tab-content">
-      <!-- 5-1. 冰箱規定 -->
+      <!-- 5-1. 夜間門禁與出入口 -->
       <div class="info-card">
         <div class="info-detail" style="width: 100%;">
-          <h3>🧊 1. 公共冰箱存放規定合規檢查</h3>
+          <h3>🌙 1. 全校宿舍夜間門禁與出入口查詢</h3>
+          <p style="margin-bottom: 0.6rem;">每日門禁管制時間為 <strong>00:00 - 06:00</strong>。宿舍區車輛限速 20 km/h。</p>
+          <div class="form-group">
+            <label>選擇宿舍樓別</label>
+            <select id="building-select" class="form-control">
+              <option value="迎曦樓">迎曦樓</option>
+              <option value="大詠絮樓">大詠絮樓</option>
+              <option value="小詠絮樓">小詠絮樓</option>
+              <option value="莊敬苑">莊敬苑</option>
+            </select>
+          </div>
+          <button class="action-btn" style="width: 100%;" onclick="queryEntrance()">查詢指定出入口</button>
+          <div id="entrance-result" class="result-box"></div>
+        </div>
+      </div>
+
+      <!-- 5-2. 冰箱規定 -->
+      <div class="info-card">
+        <div class="info-detail" style="width: 100%;">
+          <h3>🧊 2. 公共冰箱存放規定合規檢查</h3>
           <div class="form-group" style="margin-top: 0.6rem;">
             <label>物品種類/名稱</label>
             <input type="text" id="fridge-item" class="form-control" placeholder="例如：鮮奶、便當、臭豆腐">
@@ -569,10 +639,10 @@
         </div>
       </div>
 
-      <!-- 5-2. 鑰匙借用 -->
+      <!-- 5-3. 鑰匙借用 -->
       <div class="info-card">
         <div class="info-detail" style="width: 100%;">
-          <h3>🔑 2. 房門鑰匙借用規則</h3>
+          <h3>🔑 3. 房門鑰匙借用規則</h3>
           <div class="form-group" style="margin-top: 0.6rem;">
             <label>當學期累積借用次數</label>
             <input type="number" id="key-count" class="form-control" value="1" min="1">
@@ -582,10 +652,10 @@
         </div>
       </div>
 
-      <!-- 5-3. 違規處分 -->
+      <!-- 5-4. 違規處分 -->
       <div class="info-card">
         <div class="info-detail" style="width: 100%;">
-          <h3>⚠️ 3. 違規扣分與退宿試算</h3>
+          <h3>⚠️ 4. 違規扣分與退宿試算</h3>
           <div class="row" style="margin-top: 0.6rem;">
             <div class="form-group">
               <label>一般違規次數</label>
