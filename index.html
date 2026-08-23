@@ -194,18 +194,6 @@
       line-height: 1.5;
     }
 
-    .tag {
-      display: inline-block;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      color: var(--primary);
-      font-size: 0.75rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 8px;
-      font-weight: 600;
-      margin-right: 0.3rem;
-    }
-
     .action-btn {
       background: linear-gradient(135deg, var(--primary), var(--accent));
       color: #0f172a;
@@ -336,7 +324,6 @@
       cursor: pointer;
     }
 
-    /* 進度條樣式 */
     .progress-container {
       margin-bottom: 1.2rem;
       background: rgba(15, 23, 42, 0.6);
@@ -401,7 +388,7 @@
 
     <!-- Mobile 下拉選單 -->
     <div class="nav-select-wrapper">
-      <select class="nav-select" id="mobile-nav" onchange="switchTab(this.value)">
+      <select class="nav-select" id="mobile-nav" aria-label="選擇宿舍服務項目" onchange="switchTab(this.value)">
         <option value="freshman">🎓 新生開宿指南 (115學年)</option>
         <option value="intro">🏠 宿舍簡介與床位尺寸</option>
         <option value="packing">🎒 開宿必備清單</option>
@@ -567,14 +554,13 @@
       </div>
     </div>
 
-    <!-- 3. 新生開宿必備清單 (具備進度條與清除功能) -->
+    <!-- 3. 新生開宿必備清單 (具備 LocalStorage 與進度條) -->
     <div id="tab-packing" class="tab-content">
       <div class="info-card">
         <div class="info-detail" style="width: 100%;">
           <h3>📋 大一新生入住攜帶物品清單 Check List</h3>
-          <p style="margin-bottom:1rem;">入住前請確認以下物品是否已準備妥當：</p>
+          <p style="margin-bottom:1rem;">入住前請確認以下物品是否已準備妥當（已支援自動儲存狀態）：</p>
 
-          <!-- 進度條區塊 -->
           <div class="progress-container">
             <div class="progress-header">
               <span>準備進度</span>
@@ -585,7 +571,6 @@
             </div>
           </div>
 
-          <!-- 清除按鈕區塊 -->
           <div class="checklist-actions">
             <button class="action-btn btn-secondary" onclick="clearChecklist()">🧹 清除所有勾選</button>
           </div>
@@ -637,7 +622,7 @@
           <p style="margin-bottom: 0.8rem;">費用內含基本住宿費與計網中心網路費。</p>
           <div class="row">
             <div class="form-group">
-              <label>選擇樓別</label>
+              <label for="fee-building">選擇樓別</label>
               <select id="fee-building" class="form-control">
                 <option value="迎曦樓">迎曦樓</option>
                 <option value="大詠絮樓">大詠絮樓</option>
@@ -646,7 +631,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label>選擇學期</label>
+              <label for="fee-semester">選擇學期</label>
               <select id="fee-semester" class="form-control">
                 <option value="上學期">第一學期</option>
                 <option value="下學期">第二學期</option>
@@ -667,7 +652,7 @@
           <h3>🌙 1. 全校宿舍夜間門禁與出入口查詢</h3>
           <p style="margin-bottom: 0.6rem;">每日門禁管制時間為 <strong>00:00 - 06:00</strong>。宿舍區車輛限速 20 km/h。</p>
           <div class="form-group">
-            <label>選擇宿舍樓別</label>
+            <label for="building-select">選擇宿舍樓別</label>
             <select id="building-select" class="form-control">
               <option value="迎曦樓">迎曦樓</option>
               <option value="大詠絮樓">大詠絮樓</option>
@@ -685,16 +670,16 @@
         <div class="info-detail" style="width: 100%;">
           <h3>🧊 2. 公共冰箱存放規定合規檢查</h3>
           <div class="form-group" style="margin-top: 0.6rem;">
-            <label>物品種類/名稱</label>
+            <label for="fridge-item">物品種類/名稱</label>
             <input type="text" id="fridge-item" class="form-control" placeholder="例如：鮮奶、便當、臭豆腐">
           </div>
           <div class="row">
             <div class="form-group">
-              <label>冰存天數</label>
+              <label for="fridge-days">冰存天數</label>
               <input type="number" id="fridge-days" class="form-control" value="1" min="1">
             </div>
             <div class="form-group">
-              <label>最長邊長 (cm)</label>
+              <label for="fridge-size">最長邊長 (cm)</label>
               <input type="number" id="fridge-size" class="form-control" value="15" min="1">
             </div>
           </div>
@@ -714,7 +699,7 @@
         <div class="info-detail" style="width: 100%;">
           <h3>🔑 3. 房門鑰匙借用規則</h3>
           <div class="form-group" style="margin-top: 0.6rem;">
-            <label>當學期累積借用次數</label>
+            <label for="key-count">當學期累積借用次數</label>
             <input type="number" id="key-count" class="form-control" value="1" min="1">
           </div>
           <button class="action-btn" style="width: 100%;" onclick="checkKey()">查詢借用規則</button>
@@ -728,11 +713,11 @@
           <h3>⚠️ 4. 違規扣分與退宿試算</h3>
           <div class="row" style="margin-top: 0.6rem;">
             <div class="form-group">
-              <label>一般違規次數</label>
+              <label for="rule-general">一般違規次數</label>
               <input type="number" id="rule-general" class="form-control" value="0" min="0">
             </div>
             <div class="form-group">
-              <label>重大違規次數</label>
+              <label for="rule-major">重大違規次數</label>
               <input type="number" id="rule-major" class="form-control" value="0" min="0">
             </div>
           </div>
@@ -796,7 +781,25 @@
       document.getElementById('mobile-nav').value = tabId;
     }
 
-    // 更新備辦清單進度條
+    // 讀取與更新備辦清單 (使用 LocalStorage 記憶)
+    function loadChecklist() {
+      const checkboxes = document.querySelectorAll('#tab-packing input[type="checkbox"]');
+      const savedState = JSON.parse(localStorage.getItem('ntcu_packing_checklist') || '[]');
+      
+      checkboxes.forEach((cb, index) => {
+        if (savedState[index] !== undefined) {
+          cb.checked = savedState[index];
+        }
+      });
+      updateProgress();
+    }
+
+    function saveChecklist() {
+      const checkboxes = document.querySelectorAll('#tab-packing input[type="checkbox"]');
+      const state = Array.from(checkboxes).map(cb => cb.checked);
+      localStorage.setItem('ntcu_packing_checklist', JSON.stringify(state));
+    }
+
     function updateProgress() {
       const checkboxes = document.querySelectorAll('#tab-packing input[type="checkbox"]');
       const total = checkboxes.length;
@@ -810,18 +813,18 @@
       
       document.getElementById('progress-text').innerText = `${checkedCount} / ${total} (${percentage}%)`;
       document.getElementById('progress-bar-fill').style.width = `${percentage}%`;
+      
+      saveChecklist();
     }
 
-    // 清除所有勾選
     function clearChecklist() {
       const checkboxes = document.querySelectorAll('#tab-packing input[type="checkbox"]');
       checkboxes.forEach(cb => cb.checked = false);
       updateProgress();
     }
 
-    // 初始化頁面時計算一次進度
     window.addEventListener('DOMContentLoaded', () => {
-      updateProgress();
+      loadChecklist();
     });
 
     function queryEntrance() {
@@ -868,6 +871,14 @@
       const size = parseInt(document.getElementById('fridge-size').value) || 0;
       const hasLabel = document.getElementById('fridge-label').checked;
       const isSealed = document.getElementById('fridge-seal').checked;
+      const res = document.getElementById('fridge-result');
+
+      // 輸入驗證防呆
+      if (!item) {
+        res.innerHTML = `⚠️ <strong style="color:var(--danger);">請輸入物品名稱！</strong>`;
+        res.classList.add('show');
+        return;
+      }
 
       const banned = ['臭豆腐', '泡菜', '生肉', '生雞蛋', '生海鮮', '含酒精成分', '管制藥品', '廚餘'];
       const reasons = [];
@@ -878,18 +889,17 @@
       if (size > 30) reasons.push('單邊超過 30cm');
       if (banned.some(b => item.includes(b))) reasons.push(`包含違規禁放項目：${item}`);
 
-      const res = document.getElementById('fridge-result');
       if (reasons.length === 0) {
-        res.innerHTML = `✅ <strong style="color:var(--success);">符合規定</strong>，可放置於公共冰箱。`;
+        res.innerHTML = `✅ <strong style="color:var(--success);">【${item}】符合規定</strong>，可放置於公共冰箱。`;
       } else {
-        res.innerHTML = `❌ <strong style="color:var(--danger);">違規（將予以清理移出）</strong>：<br>` + reasons.map(r => `• ${r}`).join('<br>');
+        res.innerHTML = `❌ <strong style="color:var(--danger);">【${item}】違規（將予以清理移出）</strong>：<br>` + reasons.map(r => `• ${r}`).join('<br>');
       }
       res.classList.add('show');
     }
 
     function checkRule() {
-      const g = parseInt(document.getElementById('rule-general').value) || 0;
-      const m = parseInt(document.getElementById('rule-major').value) || 0;
+      const g = Math.max(0, parseInt(document.getElementById('rule-general').value) || 0);
+      const m = Math.max(0, parseInt(document.getElementById('rule-major').value) || 0);
 
       let msg = "目前無強制退宿風險。";
       let isDanger = false;
@@ -910,13 +920,13 @@
     }
 
     function checkKey() {
-      const count = parseInt(document.getElementById('key-count').value) || 1;
+      const count = Math.max(1, parseInt(document.getElementById('key-count').value) || 1);
       const res = document.getElementById('key-result');
 
       if (count === 1) {
         res.innerHTML = `⏱️ 借用限時 <strong>5 分鐘</strong>，本次免開立違規單。`;
       } else {
-        res.innerHTML = `⚠️ 借用限時 <strong>5 分鐘</strong>。同一學期第二次（含）以上借用，開立違規單乙次。`;
+        res.innerHTML = `⚠️ 借用限時 <strong>5 分鐘</strong>。同一學期第 ${count} 次借用（第二次以上），開立違規單乙次。`;
       }
       res.classList.add('show');
     }
